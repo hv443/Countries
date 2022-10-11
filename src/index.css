@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: hsl(200, 15%, 8%);
+  --secondary: hsl(0, 0%, 98%);
+  --input: hsl(0, 0%, 52%);
+  --element: hsl(0, 0%, 100%);
+}
+
+.dark {
+  --primary: hsl(0, 0%, 100%);
+  --secondary: hsl(207, 26%, 17%);
+  --input: hsl(0, 0%, 100%);
+  --element: hsl(209, 23%, 22%);
+}
+
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
