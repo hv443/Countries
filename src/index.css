@@ -14,7 +14,6 @@
 .dark {
   --primary: hsl(0, 0%, 100%);
   --secondary: hsl(207, 26%, 17%);
-  --input: hsl(0, 0%, 100%);
   --element: hsl(209, 23%, 22%);
 }
 
@@ -22,3 +21,12 @@
   font-family: "Nunito Sans", sans-serif;
 }
 
+.detail span {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.detail p {
+  color: var(--input);
+  font-weight: 300;
+}

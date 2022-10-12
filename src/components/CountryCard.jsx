@@ -6,9 +6,8 @@ const CountryCard = ({ countries }) => {
     const { name, population, region, capital } = country;
 
     return (
-      <Link to="/Country">
+      <Link key={key} to="/Country" state={country}>
         <div
-          key={key}
           className={`shadow rounded-md overflow-hidden w-[275px] h-[320px] bg-element cursor-pointer hover:scale-110 duration-200`}>
           <div className="h-[50%] overflow-hidden">
             <img
