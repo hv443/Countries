@@ -5,7 +5,6 @@ import {
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import CountryCard from "./CountryCard";
-import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [countries, setCountries] = useState();
@@ -35,12 +34,20 @@ const HomePage = () => {
 
   function regionFilter(event) {
     const filteredData = countries.filter((country) => {
-      return country.region.match(event.target.innerText);
+      return country.region === event.target.innerText;
     });
+
     setFilterByRegion(filteredData);
     setFilterBySearch(false);
     inputRef.current.value = "";
     setRegionBtn((pre) => !pre);
+  }
+
+  function noFilter(e) {
+    e.stopPropagation();
+    setRegionBtn((pre) => !pre);
+    setFilterByRegion(countries);
+    inputRef.current.value = "";
   }
 
   function toggleRegion() {
@@ -96,6 +103,11 @@ const HomePage = () => {
             onClick={regionFilter}
             className={`${!regionBtn && "h-0 top-full "}
             region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%]  rounded-md bg-element overflow-hidden`}>
+            <li
+              onClick={noFilter}
+              className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              All
+            </li>
             <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
               Africa
             </li>
@@ -119,19 +131,17 @@ const HomePage = () => {
           Loading...
         </h1>
       ) : (
-        <Link to="/Country">
-          <CountryCard
-            countries={
-              filterByRegion && filterBySearch
-                ? filterBySearch
-                : filterByRegion && !filterBySearch
-                ? filterByRegion
-                : filterBySearch
-                ? filterBySearch
-                : countries
-            }
-          />
-        </Link>
+        <CountryCard
+          countries={
+            filterByRegion && filterBySearch
+              ? filterBySearch
+              : filterByRegion && !filterBySearch
+              ? filterByRegion
+              : filterBySearch
+              ? filterBySearch
+              : countries
+          }
+        />
       )}
     </div>
   );
