@@ -4,20 +4,47 @@ import {
   faMagnifyingGlass,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import CountryCard from "./CountryCard";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [countries, setCountries] = useState();
-  const [regionMenu, setRegionMenu] = useState(false);
-  const [search, setSearch] = useState();
   const [loading, setLoading] = useState();
+  const [regionBtn, setRegionBtn] = useState(false);
+  const [filterByRegion, setFilterByRegion] = useState(false);
+  const [filterBySearch, setFilterBySearch] = useState(false);
   const inputRef = useRef();
 
-  function searchCountry() {
-    console.log(inputRef);
+  function searchCountry(searchValue) {
+    searchValue = inputRef.current.value;
+
+    const filteredData =
+      filterByRegion.length > 0
+        ? filterByRegion.filter((country) => {
+            return country.name.common
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
+          })
+        : countries.filter((country) => {
+            return country.name.common
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
+          });
+    setFilterBySearch(filteredData);
   }
 
-  function selectRegion() {
-    setRegionMenu((pre) => !pre);
+  function regionFilter(event) {
+    const filteredData = countries.filter((country) => {
+      return country.region.match(event.target.innerText);
+    });
+    setFilterByRegion(filteredData);
+    setFilterBySearch(false);
+    inputRef.current.value = "";
+    setRegionBtn((pre) => !pre);
+  }
+
+  function toggleRegion() {
+    setRegionBtn((pre) => !pre);
   }
 
   useEffect(() => {
@@ -30,48 +57,16 @@ const HomePage = () => {
       });
   }, []);
 
-  const country = countries?.map((country, key) => {
-    return (
-      <div
-        key={key}
-        className="shadow rounded-md overflow-hidden w-[275px] h-[320px] bg-element cursor-pointer hover:scale-110 duration-200">
-        <div className="h-[50%] overflow-hidden">
-          <img
-            src={country.flags.png}
-            alt="flag img"
-            className="object-cover w-full h-full"
-          />
-        </div>
-        <div className="p-5 ">
-          <h1 className="font-extrabold text-lg">{country.name.common}</h1>
-          <div className="my-3">
-            <p className="font-normal">
-              <span className="font-bold">Population : </span>
-              <span className="text-input">{country.population}</span>
-            </p>
-            <p className="font-normal">
-              <span className="font-bold">Region : </span>
-              <span className="text-input">{country.region}</span>
-            </p>
-            <p className="font-normal">
-              <span className="font-bold">Capital : </span>
-              <span className="text-input">{country.capital}</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  });
-
   return (
     <div
-      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary
+      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary min-h-screen
         md:px-10">
       <div
         className="flex flex-col gap-8
         md:flex-row md:justify-between md:gap-0">
         <div className="relative">
           <input
+            onChange={searchCountry}
             ref={inputRef}
             type="text"
             name="search"
@@ -80,18 +75,17 @@ const HomePage = () => {
             md:w-96"
           />
           <FontAwesomeIcon
-            onClick={searchCountry}
             icon={faMagnifyingGlass}
             className="absolute left-5 top-1/2 -translate-y-1/2 cursor-pointer text-input"
           />
         </div>
 
         <div
-          className="max-w-[60%]  shadow px-5 py-3 rounded-md relative bg-element
+          className="max-w-[60%] shadow rounded-md relative
               md:max-w-fit">
           <div
-            onClick={selectRegion}
-            className="flex justify-between items-center cursor-pointer ">
+            onClick={toggleRegion}
+            className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer">
             <span>Filter by Region</span>
             <FontAwesomeIcon
               icon={faChevronDown}
@@ -99,22 +93,46 @@ const HomePage = () => {
             />
           </div>
           <ul
-            className={`${!regionMenu ? "" : ""}
-            absolute z-40 shadow w-full duration-300 left-0 top-[110%] px-5 py-3 space-y-2 rounded-md bg-element`}>
-            <li>Africa</li>
-            <li>America</li>
-            <li>Asia</li>
-            <li>Europe</li>
-            <li>Oceania</li>
+            onClick={regionFilter}
+            className={`${!regionBtn && "h-0 top-full "}
+            region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%]  rounded-md bg-element overflow-hidden`}>
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              Africa
+            </li>
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              Asia
+            </li>
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              Americas
+            </li>
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              Europe
+            </li>
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+              Oceania
+            </li>
           </ul>
         </div>
       </div>
-
-      <div
-        className="flex flex-wrap gap-10 justify-center items-center
-           sm:justify-evenly lg:justify-between">
-        {loading ? <h1>Loading...</h1> : country}
-      </div>
+      {loading ? (
+        <h1 className="w-full h-[50vh] text-3xl flex items-center justify-center">
+          Loading...
+        </h1>
+      ) : (
+        <Link to="/Country">
+          <CountryCard
+            countries={
+              filterByRegion && filterBySearch
+                ? filterBySearch
+                : filterByRegion && !filterBySearch
+                ? filterByRegion
+                : filterBySearch
+                ? filterBySearch
+                : countries
+            }
+          />
+        </Link>
+      )}
     </div>
   );
 };
