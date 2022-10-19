@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
@@ -10,49 +10,10 @@ const HomePage = () => {
   const [countries, setCountries] = useState();
   const [loading, setLoading] = useState();
   const [regionBtn, setRegionBtn] = useState(false);
-  const [filterByRegion, setFilterByRegion] = useState(false);
-  const [filterBySearch, setFilterBySearch] = useState(false);
-  const inputRef = useRef();
+  const [filteredCountries, setFilteredCountries] = useState(false);
 
-  function searchCountry(searchValue) {
-    searchValue = inputRef.current.value;
-
-    const filteredData =
-      filterByRegion.length > 0
-        ? filterByRegion.filter((country) => {
-            return country.name.common
-              .toLowerCase()
-              .includes(searchValue.toLowerCase());
-          })
-        : countries.filter((country) => {
-            return country.name.common
-              .toLowerCase()
-              .includes(searchValue.toLowerCase());
-          });
-    setFilterBySearch(filteredData);
-  }
-
-  function regionFilter(event) {
-    const filteredData = countries.filter((country) => {
-      return country.region === event.target.innerText;
-    });
-
-    setFilterByRegion(filteredData);
-    setFilterBySearch(false);
-    inputRef.current.value = "";
-    setRegionBtn((pre) => !pre);
-  }
-
-  function noFilter(e) {
-    e.stopPropagation();
-    setRegionBtn((pre) => !pre);
-    setFilterByRegion(countries);
-    inputRef.current.value = "";
-  }
-
-  function toggleRegion() {
-    setRegionBtn((pre) => !pre);
-  }
+  const [regionText, setRegionText] = useState(false);
+  const searchInput = useRef();
 
   useEffect(() => {
     setLoading(true);
@@ -64,6 +25,35 @@ const HomePage = () => {
       });
   }, []);
 
+  function searchFilter(e) {
+    const inputValue = e.target.value;
+    const searchFiltered = countries?.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .includes(inputValue.toLowerCase());
+    });
+    setFilteredCountries(searchFiltered);
+  }
+
+  function regionFilter(e) {
+    const regionFiltered = countries?.filter((country) => {
+      return e.target.innerText == "All"
+        ? country
+        : country.region
+            .toLowerCase()
+            .includes(e.target.innerText.toLowerCase());
+    });
+
+    setFilteredCountries(regionFiltered);
+    setRegionBtn((pre) => !pre);
+    searchInput.current.value = "";
+    setRegionText(e.target.innerText);
+  }
+
+  function toggleRegion(e) {
+    setRegionBtn((pre) => !pre);
+  }
+
   return (
     <div
       className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary min-h-screen
@@ -73,8 +63,8 @@ const HomePage = () => {
         md:flex-row md:justify-between md:gap-0">
         <div className="relative">
           <input
-            onChange={searchCountry}
-            ref={inputRef}
+            ref={searchInput}
+            onChange={searchFilter}
             type="text"
             name="search"
             placeholder="Search for a country..."
@@ -93,7 +83,7 @@ const HomePage = () => {
           <div
             onClick={toggleRegion}
             className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer">
-            <span>Filter by Region</span>
+            <span>{regionText ? regionText : "Filter by Region"}</span>
             <FontAwesomeIcon
               icon={faChevronDown}
               className="text-[10px] ml-3"
@@ -103,9 +93,7 @@ const HomePage = () => {
             onClick={regionFilter}
             className={`${!regionBtn && "h-0 top-full "}
             region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%]  rounded-md bg-element overflow-hidden`}>
-            <li
-              onClick={noFilter}
-              className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
               All
             </li>
             <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
@@ -132,15 +120,7 @@ const HomePage = () => {
         </h1>
       ) : (
         <CountryCard
-          countries={
-            filterByRegion && filterBySearch
-              ? filterBySearch
-              : filterByRegion && !filterBySearch
-              ? filterByRegion
-              : filterBySearch
-              ? filterBySearch
-              : countries
-          }
+          countries={filteredCountries ? filteredCountries : countries}
         />
       )}
     </div>

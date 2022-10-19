@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ setDarkMode }) => {
   return (
@@ -7,10 +8,12 @@ const Header = ({ setDarkMode }) => {
       <div className="flex justify-between items-center px-4 py-5 shadow font-bold">
         <h1>Where in the world?</h1>
         <button
+          className="space-x-1 flex items-center"
           onClick={() => {
             setDarkMode((pre) => !pre);
           }}>
-          Dark Mode
+          <FontAwesomeIcon icon={faMoon} />
+          <span> Dark Mode</span>
         </button>
       </div>
     </div>
