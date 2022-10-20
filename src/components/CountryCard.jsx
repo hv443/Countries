@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 const CountryCard = ({ countries }) => {
   const country =
     countries?.length <= 0 ? (
-      <div className="text-2xl font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div
+        className="text-lg font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+          md:text-2xl">
         No Countries Found
       </div>
     ) : (

@@ -13,7 +13,7 @@ const Header = ({ setDarkMode }) => {
             setDarkMode((pre) => !pre);
           }}>
           <FontAwesomeIcon icon={faMoon} />
-          <span> Dark Mode</span>
+          <span className="text-sm"> Dark Mode</span>
         </button>
       </div>
     </div>
