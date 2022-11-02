@@ -11,6 +11,7 @@ const CountryCard = ({ countries }) => {
       </div>
     ) : (
       countries?.map((country, key) => {
+        
         const { name, population, region, capital } = country;
 
         return (

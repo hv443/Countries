@@ -6,24 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CountryCard from "./CountryCard";
 
-const HomePage = () => {
-  const [countries, setCountries] = useState();
-  const [loading, setLoading] = useState();
+const HomePage = ({countries,loading}) => {
+
   const [regionBtn, setRegionBtn] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState(false);
 
   const [regionText, setRegionText] = useState(false);
   const searchInput = useRef();
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://restcountries.com/v3.1/all")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-        setLoading(false);
-      });
-  }, []);
 
   function searchFilter(e) {
     const inputValue = e.target.value;

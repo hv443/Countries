@@ -6,13 +6,25 @@ import CountryDetail from "./components/CountryDetail";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [countries, setCountries] = useState();
+  const [loading, setLoading] = useState();
+  
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://restcountries.com/v3.1/all")
+      .then((res) => res.json())
+      .then((data) => {
+        setCountries(data);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <BrowserRouter>
       <div className={`${darkMode ? "dark" : ""}`}>
         <Header setDarkMode={setDarkMode} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage countries={countries} loading={loading} />} />
           <Route path="/Country" element={<CountryDetail />} />
         </Routes>
       </div>
