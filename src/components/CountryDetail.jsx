@@ -32,7 +32,7 @@ const CountryDetail = () => {
   return (
     <div
       className="min-h-screen p-6 text-primary bg-secondary text-base 
-        sm:p-10">
+        md:p-10">
       <Link to="/">
         <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm">
           <FontAwesomeIcon icon={faArrowLeft} />
@@ -40,24 +40,24 @@ const CountryDetail = () => {
         </button>
       </Link>
 
-      <div className="sm:grid sm:grid-cols-2 sm:mt-12 sm:gap-20">
+      <div className="md:grid md:grid-cols-2 md:mt-12 md:gap-20">
         <div
           className="w-full my-12 shadow
-            sm:my-0">
+            md:my-0">
           <img
             className="w-full 
-            sm:h-full "
+            md:h-full "
             src={png}
             alt="Flag"
           />
         </div>
 
-        <div className="sm:grid  sm:items-center sm:content-center">
+        <div className="md:grid  md:items-center md:content-center">
           <div>
             <h1 className="text-3xl font-bold mb-5">{common}</h1>
           </div>
 
-          <div className="sm:grid sm:grid-cols-2 sm:mb-10 sm:gap-20">
+          <div className="md:grid md:grid-cols-2 md:mb-10 md:gap-20">
             <div className="capitalize space-y-2 detail">
               <p>
                 <span>native name : </span> {nativeName[0].common}
@@ -80,7 +80,7 @@ const CountryDetail = () => {
             </div>
             <div
               className="capitalize space-y-2 my-10 detail 
-                sm:my-0">
+                md:my-0">
               <p>
                 <span>top level domain : </span>
                 {tld}
@@ -96,10 +96,10 @@ const CountryDetail = () => {
             </div>
           </div>
 
-          <div className="sm:flex sm:items-center sm:space-x-4">
+          <div className="md:flex md:items-center md:space-x-4">
             <h4
               className="text-lg font-bold mb-3
-                sm:mb-0 min-w-max ">
+                md:mb-0 min-w-max ">
               Border Countries:
             </h4>
             <div className="flex w-full space-x-2 text-center justify-evenly">
