@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,8 @@ const CountryDetail = () => {
   const countryRef = useRef(location.state);
 
   const {
-    flags: { png },
-    name: { common },
+    flags: { png: flag },
+    name: { common: countryName },
     region,
     subregion,
     capital,
@@ -24,10 +24,25 @@ const CountryDetail = () => {
   borders?.length > 3 ? borders.splice(3) : borders;
 
   const currency = Object.keys(currencies);
-  const language = Object.values(languages);
+  const language = Object.values(languages)
+    .map((lan) => lan)
+    .join(",");
 
-  const nativeNameObject = countryRef.current.name.nativeName;
-  const nativeName = Object.values(nativeNameObject);
+  const nativeName = Object.values(countryRef.current.name.nativeName)[0].common;
+
+  const borderCountries = borders ? (
+    borders.map((border, id) => {
+      return (
+        <p
+          key={id}
+          className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold text-input">
+          {border}
+        </p>
+      );
+    })
+  ) : (
+    <p>No Border Countries</p>
+  );
 
   return (
     <div
@@ -47,14 +62,14 @@ const CountryDetail = () => {
           <img
             className="w-full 
             md:h-full "
-            src={png}
+            src={flag}
             alt="Flag"
           />
         </div>
 
         <div className="md:grid  md:items-center md:content-center">
           <div>
-            <h1 className="text-3xl font-bold mb-5">{common}</h1>
+            <h1 className="text-3xl font-bold mb-5">{countryName}</h1>
           </div>
 
           <div className="md:grid md:grid-cols-2 md:mb-10 md:gap-20">
@@ -64,7 +79,7 @@ const CountryDetail = () => {
               </p>
               <p>
                 <span>Population :</span>
-                {new Intl.NumberFormat('en-IN').format(population)}
+                {new Intl.NumberFormat("en-IN").format(population)}
               </p>
               <p>
                 <span>region : </span> {region}
@@ -87,11 +102,11 @@ const CountryDetail = () => {
               </p>
               <p>
                 <span>curencies : </span>
-                {currency[0]}
+                {currency}
               </p>
               <p>
                 <span>languages : </span>
-                {language?.map((lan) => lan).join(",")}
+                {language}
               </p>
             </div>
           </div>
@@ -102,17 +117,7 @@ const CountryDetail = () => {
                 md:mb-0 min-w-max ">
               Border Countries:
             </h4>
-            <div className="flex w-full space-x-2 text-center justify-evenly">
-              {borders ? borders.map((border, id) => {
-                return (
-                  <p
-                    key={id}
-                    className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold text-input">
-                    {border}
-                  </p>
-                );
-              }) : " No Border Countries "}
-            </div>
+            <div className="flex w-full gap-3 text-center">{borderCountries}</div>
           </div>
         </div>
       </div>

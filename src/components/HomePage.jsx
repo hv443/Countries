@@ -1,19 +1,18 @@
-import React, {useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+
 import CountryCard from "./CountryCard";
 
-const HomePage = ({countries,loading}) => {
-
+const HomePage = ({ countries, loading }) => {
   const [regionBtn, setRegionBtn] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState(false);
 
   const [regionText, setRegionText] = useState(false);
   const searchInput = useRef();
-
 
   function searchFilter(e) {
     const inputValue = e.target.value;
@@ -40,13 +39,13 @@ const HomePage = ({countries,loading}) => {
     setRegionText(e.target.innerText);
   }
 
-  function toggleRegion(e) {
+  function toggleRegion() {
     setRegionBtn((pre) => !pre);
   }
 
   return (
     <div
-      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary min-h-screen
+      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary duration-200 min-h-screen
         md:px-10">
       <div
         className="flex flex-col gap-8
