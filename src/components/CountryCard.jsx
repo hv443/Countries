@@ -49,7 +49,7 @@ const CountryCard = ({ countries }) => {
 
   return (
     <div
-      className="flex flex-wrap gap-10 justify-center px-6 
+      className="flex flex-wrap gap-14 justify-center px-6 
        sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {country}
     </div>
