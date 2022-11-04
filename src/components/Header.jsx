@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ setDarkMode }) => {
+
+
   return (
     <div className="text-primary bg-element relative">
       <div className="flex justify-between items-center px-4 py-5 shadow font-bold">

@@ -8,20 +8,21 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [countries, setCountries] = useState();
   const [loading, setLoading] = useState();
-  
+
   useEffect(() => {
     setLoading(true);
     fetch("https://restcountries.com/v3.1/all")
-      .then((res) => res.json())
+      .then((res) =>res.json())
       .then((data) => {
         setCountries(data);
         setLoading(false);
-      });
+      })
   }, []);
+
 
   return (
     <BrowserRouter>
-      <div className={`${darkMode ? "dark" : ""}`}>
+      <div className={`${darkMode ? "dark" : null}`}>
         <Header setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<HomePage countries={countries} loading={loading} />} />

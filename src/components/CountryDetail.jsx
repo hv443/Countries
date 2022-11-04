@@ -40,19 +40,19 @@ const CountryDetail = () => {
         </button>
       </Link>
 
-      <div className="sm:grid sm:grid-cols-2 sm:mt-12">
+      <div className="sm:grid sm:grid-cols-2 sm:mt-12 sm:gap-20">
         <div
-          className="w-full my-12
+          className="w-full my-12 shadow
             sm:my-0">
           <img
             className="w-full 
-            sm:h-full sm:w-[90%]"
+            sm:h-full "
             src={png}
             alt="Flag"
           />
         </div>
 
-        <div className="sm:grid  sm:place-content-center">
+        <div className="sm:grid  sm:items-center sm:content-center">
           <div>
             <h1 className="text-3xl font-bold mb-5">{common}</h1>
           </div>
@@ -103,15 +103,15 @@ const CountryDetail = () => {
               Border Countries:
             </h4>
             <div className="flex w-full space-x-2 text-center justify-evenly">
-              {borders?.map((bor, id) => {
+              {borders ? borders.map((border, id) => {
                 return (
                   <p
                     key={id}
-                    className="bg-element w-full rounded-sm py-2 text-sm font-semibold text-input">
-                    {bor}
+                    className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold text-input">
+                    {border}
                   </p>
                 );
-              })}
+              }) : " No Border Countries "}
             </div>
           </div>
         </div>
