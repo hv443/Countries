@@ -16,8 +16,8 @@ const CountryCard = ({ countries }) => {
 
         return (
           <Link key={key} to="/Country" state={country}
-            className={`shadow rounded-md overflow-hidden w-full max-w-[300px]
-               h-[330px] bg-element cursor-pointer hover:scale-105 duration-200`}>
+            className={`shadow rounded-md overflow-hidden w-full max-w-[295px]
+               h-[340px] bg-element cursor-pointer hover:scale-105 duration-200`}>
             <div className="h-[50%] overflow-hidden">
               <img
                 src={country.flags.png}

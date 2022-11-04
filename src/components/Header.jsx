@@ -8,7 +8,7 @@ const Header = ({ setDarkMode }) => {
   return (
     <div className="text-primary bg-element relative">
       <div className="flex justify-between items-center px-4 py-5 shadow font-bold">
-        <h1>Where in the world?</h1>
+        <h1 className="text-xl">Where in the world?</h1>
         <button
           className="space-x-1 flex items-center"
           onClick={() => {
