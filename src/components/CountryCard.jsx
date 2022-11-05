@@ -18,7 +18,7 @@ const CountryCard = ({ countries }) => {
         to="/Country"
         state={country}
         className={`card shadow rounded-md overflow-hidden w-full max-w-[295px]
-         h-[340px] bg-element cursor-pointer hover:scale-105 duration-300`}>
+         h-[340px] bg-element cursor-pointer hover:scale-105 duration-200`}>
         <div className="h-[50%] overflow-hidden">
           <img src={country.flags.png} alt="flag img" className="object-cover w-full h-full" />
         </div>

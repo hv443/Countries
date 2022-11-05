@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-
+import RegionFilter from "../assets/RegionFilter";
 import CountryCard from "./CountryCard";
 
-const HomePage = ({ countries, loading }) => {
+const HomePage = ({ countries, loading, error }) => {
   const [regionBtn, setRegionBtn] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState(false);
 
@@ -38,7 +38,7 @@ const HomePage = ({ countries, loading }) => {
 
   return (
     <div
-      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary duration-300 min-h-screen
+      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary duration-200 min-h-screen
         md:px-10">
       <div
         className="flex flex-col gap-8
@@ -50,7 +50,7 @@ const HomePage = ({ countries, loading }) => {
             type="text"
             name="search"
             placeholder="Search for a country..."
-            className=" px-10 pl-14 py-3 shadow w-full rounded-md outline-none text-input bg-element duration-300
+            className=" px-10 pl-14 py-3 shadow w-full rounded-md outline-none text-input bg-element duration-200
             md:w-96"
           />
           <FontAwesomeIcon
@@ -64,40 +64,26 @@ const HomePage = ({ countries, loading }) => {
               sm:min-w-[15%] lg:min-w-[10%]">
           <div
             onClick={toggleRegion}
-            className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer duration-300">
+            className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer duration-200">
             <span>{regionText ? regionText : "Filter by Region"}</span>
             <FontAwesomeIcon
               icon={faChevronDown}
-              className={`${regionBtn ? "rotate-180" : "rotate-0"} text-[10px] ml-3 duration-300`}
+              className={`${regionBtn ? "rotate-180" : "rotate-0"} text-[10px] ml-3 duration-200`}
             />
           </div>
+
           <ul
             onClick={regionFilter}
-            className={`${!regionBtn ? "h-0 top-full" : "max-h-fit h-[500%]"}
-            region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%] rounded-md bg-element overflow-hidden`}>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              All
-            </li>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              Africa
-            </li>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              Asia
-            </li>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              Americas
-            </li>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              Europe
-            </li>
-            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
-              Oceania
-            </li>
+            className={`${!regionBtn ? "h-0 top-full" : "h-[490%]"}
+            region-menu absolute z-40 shadow-lg w-full duration-200 left-0 top-[110%] rounded-md bg-element overflow-hidden`}>
+            <RegionFilter />
           </ul>
         </div>
       </div>
       {loading ? (
         <h1 className="w-full h-[50vh] text-3xl flex items-center justify-center">Loading...</h1>
+      ) : error ? (
+        <h1 className="w-full  text-base text-center">{error}</h1>
       ) : (
         <CountryCard countries={filteredCountries ? filteredCountries : countries} />
       )}
