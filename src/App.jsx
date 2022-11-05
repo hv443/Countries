@@ -32,11 +32,8 @@ function App() {
     <div className={`${darkMode ? "dark" : null}`}>
       <Header setDarkMode={setDarkMode} />
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage countries={countries} loading={loading} />}
-          />
-        <Route path="/Country" element={<CountryDetail/>} />
+        <Route path="/" element={<HomePage countries={countries} loading={loading} />} />
+        <Route path="/Country" element={<CountryDetail />} />
       </Routes>
     </div>
   );

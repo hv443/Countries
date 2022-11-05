@@ -18,13 +18,9 @@ const CountryCard = ({ countries }) => {
         to="/Country"
         state={country}
         className={`card shadow rounded-md overflow-hidden w-full max-w-[295px]
-         h-[340px] bg-element cursor-pointer hover:scale-105 duration-200`}>
+         h-[340px] bg-element cursor-pointer hover:scale-105 duration-300`}>
         <div className="h-[50%] overflow-hidden">
-          <img
-            src={country.flags.png}
-            alt="flag img"
-            className="object-cover w-full h-full"
-          />
+          <img src={country.flags.png} alt="flag img" className="object-cover w-full h-full" />
         </div>
         <div className="p-5">
           <h1 className="font-extrabold text-lg">{name.common}</h1>
@@ -49,8 +45,7 @@ const CountryCard = ({ countries }) => {
     );
   });
 
-  const country =
-    countries?.length <= 0 ? noCountriesFound : countriesToDisplay;
+  const country = countries?.length <= 0 ? noCountriesFound : countriesToDisplay;
 
   return (
     <div

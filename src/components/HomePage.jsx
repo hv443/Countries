@@ -1,9 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 import CountryCard from "./CountryCard";
 
@@ -17,9 +14,7 @@ const HomePage = ({ countries, loading }) => {
   function searchFilter(e) {
     const inputValue = e.target.value;
     const searchFiltered = countries?.filter((country) => {
-      return country.name.common
-        .toLowerCase()
-        .includes(inputValue.toLowerCase());
+      return country.name.common.toLowerCase().includes(inputValue.toLowerCase());
     });
     setFilteredCountries(searchFiltered);
   }
@@ -28,9 +23,7 @@ const HomePage = ({ countries, loading }) => {
     const regionFiltered = countries?.filter((country) => {
       return e.target.innerText == "All"
         ? country
-        : country.region
-            .toLowerCase()
-            .includes(e.target.innerText.toLowerCase());
+        : country.region.toLowerCase().includes(e.target.innerText.toLowerCase());
     });
 
     setFilteredCountries(regionFiltered);
@@ -45,7 +38,7 @@ const HomePage = ({ countries, loading }) => {
 
   return (
     <div
-      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary duration-200 min-h-screen
+      className="px-4 py-6 text-sm font-semibold space-y-8 text-primary bg-secondary duration-300 min-h-screen
         md:px-10">
       <div
         className="flex flex-col gap-8
@@ -57,7 +50,7 @@ const HomePage = ({ countries, loading }) => {
             type="text"
             name="search"
             placeholder="Search for a country..."
-            className=" px-10 pl-14 py-3 shadow w-full rounded-md outline-none text-input bg-element
+            className=" px-10 pl-14 py-3 shadow w-full rounded-md outline-none text-input bg-element duration-300
             md:w-96"
           />
           <FontAwesomeIcon
@@ -67,50 +60,46 @@ const HomePage = ({ countries, loading }) => {
         </div>
 
         <div
-          className="max-w-[60%] shadow rounded-md relative
-              md:max-w-fit">
+          className="max-w-[50%] shadow rounded-md relative 
+              sm:min-w-[15%] lg:min-w-[10%]">
           <div
             onClick={toggleRegion}
-            className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer">
+            className="flex justify-between rounded-md px-5 py-3 bg-element items-center cursor-pointer duration-300">
             <span>{regionText ? regionText : "Filter by Region"}</span>
             <FontAwesomeIcon
               icon={faChevronDown}
-              className="text-[10px] ml-3"
+              className={`${regionBtn ? "rotate-180" : "rotate-0"} text-[10px] ml-3 duration-300`}
             />
           </div>
           <ul
             onClick={regionFilter}
-            className={`${!regionBtn && "h-0 top-full "}
-            region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%]  rounded-md bg-element overflow-hidden`}>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            className={`${!regionBtn ? "h-0 top-full" : "max-h-fit h-[500%]"}
+            region-menu absolute z-40  shadow w-full duration-300 left-0 top-[110%] rounded-md bg-element overflow-hidden`}>
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               All
             </li>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               Africa
             </li>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               Asia
             </li>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               Americas
             </li>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               Europe
             </li>
-            <li className="px-3 py-2 hover:bg-secondary duration-300 cursor-pointer">
+            <li className="px-3 py-2 hover:bg-primary hover:text-secondary duration-100 cursor-pointer">
               Oceania
             </li>
           </ul>
         </div>
       </div>
       {loading ? (
-        <h1 className="w-full h-[50vh] text-3xl flex items-center justify-center">
-          Loading...
-        </h1>
+        <h1 className="w-full h-[50vh] text-3xl flex items-center justify-center">Loading...</h1>
       ) : (
-        <CountryCard
-          countries={filteredCountries ? filteredCountries : countries}
-        />
+        <CountryCard countries={filteredCountries ? filteredCountries : countries} />
       )}
     </div>
   );
