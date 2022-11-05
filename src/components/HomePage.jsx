@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import RegionFilter from "../assets/RegionFilter";
+import RegionFilterBtn from "../assets/RegionFilterBtn";
 import CountryCard from "./CountryCard";
 
 const HomePage = ({ countries, loading, error }) => {
@@ -73,10 +73,9 @@ const HomePage = ({ countries, loading, error }) => {
           </div>
 
           <ul
-            onClick={regionFilter}
             className={`${!regionBtn ? "h-0 top-full" : "h-[490%]"}
             region-menu absolute z-40 shadow-lg w-full duration-200 left-0 top-[110%] rounded-md bg-element overflow-hidden`}>
-            <RegionFilter />
+            <RegionFilterBtn filterByRegion={regionFilter} />
           </ul>
         </div>
       </div>
