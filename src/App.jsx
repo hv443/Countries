@@ -19,6 +19,9 @@ function App() {
     //             setLoading(false);
     //         });
     // }, []);
+    function toggleDarkMode() {
+        setDarkMode((pre) => !pre);
+    }
 
     useEffect(() => {
         const fetchCoutries = async () => {
@@ -45,7 +48,7 @@ function App() {
 
     return (
         <div className={`${darkMode ? "dark" : null}`}>
-            <Header setDarkMode={setDarkMode} />
+            <Header toggleDarkMode={toggleDarkMode} />
             <Routes>
                 <Route
                     path="/"
@@ -53,7 +56,6 @@ function App() {
                 />
                 <Route path="/Country" element={<CountryDetail />} />
             </Routes>
-         
         </div>
     );
 }
