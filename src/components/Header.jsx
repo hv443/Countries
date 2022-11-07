@@ -1,15 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-const Header = ({ toggleDarkMode }) => {
+const Header = ({ toggleDarkMode, darkMode }) => {
     return (
         <div className="text-primary bg-element relative duration-200">
-            <div className="flex justify-between items-center px-4 py-5 shadow font-bold">
+            <div className="flex justify-between items-center py-5 px-3 shadow font-bold sm:px-10 ">
                 <h1 className="text-lg md:text-xl">Where in the world?</h1>
                 <button className="space-x-1 flex items-center" onClick={toggleDarkMode}>
-                    <FontAwesomeIcon icon={faMoon} />
-                    <span className="text-sm"> Dark Mode</span>
+                    <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+                    <span className="text-sm">{darkMode ? "Light" : "Dark"}</span>
                 </button>
             </div>
         </div>

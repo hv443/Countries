@@ -49,22 +49,25 @@ const CountryCard = ({ countries }) => {
         );
     });
 
-    const noCountriesFound = <div className="text-xl font-bold mt-10">No Countries Found !!</div>;
-
-    const country = countries?.length <= 0 ? noCountriesFound : countriesToDisplay;
+    const country =
+        countries?.length <= 0 ? (
+            <p className="w-full text-center text-lg">No Country to Display !!</p>
+        ) : (
+            <div
+                className="grid gap-8 px-6 place-content-center
+sm:px-0 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3 xl:grid-cols-4 lg:gap-14">
+                {countriesToDisplay}
+            </div>
+        );
 
     return (
         <>
-            <div
-                className="grid gap-8 px-6 place-content-center
-                sm:px-0 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3 xl:grid-cols-4 lg:gap-14">
-                {country}
-            </div>
+            {country}
 
             {countries.length > countriesCount && (
                 <div className="flex gap-4 flex-wrap items-center justify-center">
                     <button
-                        className="border py-3 px-5 rounded-lg bg-primary text-secondary duration-300 shadow hover:bg-secondary hover:text-primary"
+                        className="border border-primary py-3 px-5 rounded-lg bg-primary text-secondary duration-300 shadow hover:bg-secondary hover:text-primary"
                         onClick={loadMoreCountries}>
                         Load More
                     </button>

@@ -74,84 +74,86 @@ const CountryDetail = ({ countries }) => {
     //  !!!
 
     return (
-        <div
-            className="min-h-screen p-6 text-primary bg-secondary text-base duration-200
-        md:p-10">
-            <Link to="/">
-                <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm duration-200 ">
-                    <FontAwesomeIcon icon={faArrowLeft} />
-                    <p>Back</p>
-                </button>
-            </Link>
+        <div className="text-primary bg-secondary min-h-screen text-base duration-200">
+            <main
+                className="mx-auto p-5 pt-14
+       sm:max-w-[85%] ">
+                <Link to="/">
+                    <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm duration-200 ">
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <p>Back</p>
+                    </button>
+                </Link>
 
-            <div className="md:grid md:grid-cols-2 md:mt-12 md:gap-20">
-                <div
-                    className="w-full my-12 shadow
+                <div className="md:grid md:grid-cols-2 md:mt-12 md:gap-20">
+                    <div
+                        className="w-full my-12 shadow rounded-sm overflow-hidden
             md:my-0">
-                    <img
-                        className="w-full 
+                        <img
+                            className="w-full 
             md:h-full "
-                        src={flag}
-                        alt="Flag"
-                    />
-                </div>
-
-                <div className="md:grid  md:items-center md:content-center">
-                    <div>
-                        <h1 className="text-3xl font-bold mb-5">{countryName}</h1>
+                            src={flag}
+                            alt="Flag"
+                        />
                     </div>
 
-                    <div className="md:grid md:grid-cols-2 md:mb-10 md:gap-20">
-                        <div className="capitalize space-y-2 detail">
-                            <p>
-                                <span>native name : </span> {nativeName}
-                            </p>
-                            <p>
-                                <span>Population :</span>
-                                {new Intl.NumberFormat("en-IN").format(population)}
-                            </p>
-                            <p>
-                                <span>region : </span> {region}
-                            </p>
-                            <p>
-                                <span>sub region : </span>
-                                {subregion}
-                            </p>
-                            <p>
-                                <span>capital : </span>
-                                {capital}
-                            </p>
+                    <div className="md:grid  md:items-center md:content-center">
+                        <div>
+                            <h1 className="text-3xl font-bold mb-5">{countryName}</h1>
                         </div>
-                        <div
-                            className="capitalize space-y-2 my-10 detail 
+
+                        <div className="md:grid md:grid-cols-2 md:mb-10 md:gap-20">
+                            <div className="capitalize space-y-2 detail">
+                                <p>
+                                    <span>native name : </span> {nativeName}
+                                </p>
+                                <p>
+                                    <span>Population :</span>
+                                    {new Intl.NumberFormat("en-IN").format(population)}
+                                </p>
+                                <p>
+                                    <span>region : </span> {region}
+                                </p>
+                                <p>
+                                    <span>sub region : </span>
+                                    {subregion}
+                                </p>
+                                <p>
+                                    <span>capital : </span>
+                                    {capital}
+                                </p>
+                            </div>
+                            <div
+                                className="capitalize space-y-2 my-10 detail 
                 md:my-0">
-                            <p>
-                                <span>top level domain : </span>
-                                {tld}
-                            </p>
-                            <p>
-                                <span>curencies : </span>
-                                {currency}
-                            </p>
-                            <p>
-                                <span>languages : </span>
-                                {language}
-                            </p>
+                                <p>
+                                    <span>top level domain : </span>
+                                    {tld}
+                                </p>
+                                <p>
+                                    <span>curencies : </span>
+                                    {currency}
+                                </p>
+                                <p>
+                                    <span>languages : </span>
+                                    {language}
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="md:flex md:items-center md:space-x-4">
-                        <h4
-                            className="text-lg font-bold mb-3
+                        <div className="md:flex md:items-center md:space-x-4">
+                            <h4
+                                className="text-lg font-bold mb-3
                 md:mb-0 min-w-max ">
-                            Border Countries:
-                        </h4>
-                        <div className="flex w-full gap-3 text-center cursor-pointer">
-                            {borderCountries}
+                                Border Countries:
+                            </h4>
+                            <div className="flex w-full gap-3 text-center cursor-pointer">
+                                {borderCountries}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     );
 };
