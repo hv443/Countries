@@ -17,7 +17,7 @@ const CountryCard = ({ countries }) => {
                 key={key}
                 to="/Country"
                 state={country}
-                className={`card shadow rounded-md overflow-hidden w-full max-w-[295px] h-[340px] bg-element cursor-pointer hover:scale-105 duration-200`}>
+                className={`card shadow rounded-md overflow-hidden w-full max-w-[285px] h-[340px] bg-element cursor-pointer hover:scale-105 duration-200 hover:shadow-xl`}>
                 <div className="h-[50%] overflow-hidden">
                     <img
                         src={country.flags.png}
@@ -55,15 +55,15 @@ const CountryCard = ({ countries }) => {
     return (
         <>
             <div
-                className="flex flex-wrap gap-14 justify-center px-6 
-                sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                className="flex flex-wrap gap-8 justify-center px-6 
+                sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-12">
                 {country}
             </div>
 
             {countries.length > countriesCount && (
                 <div className="flex gap-4 flex-wrap items-center justify-center">
                     <button
-                        className="border-2 py-3 px-5 rounded-lg shadow-md"
+                        className="border py-3 px-5 rounded-lg bg-primary text-secondary duration-300 shadow hover:bg-secondary hover:text-primary"
                         onClick={loadMoreCountries}>
                         Load More
                     </button>

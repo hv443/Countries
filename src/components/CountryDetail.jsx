@@ -52,7 +52,7 @@ const CountryDetail = () => {
             className="min-h-screen p-6 text-primary bg-secondary text-base duration-200
         md:p-10">
             <Link to="/">
-                <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm duration-200">
+                <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm duration-200 ">
                     <FontAwesomeIcon icon={faArrowLeft} />
                     <p>Back</p>
                 </button>
