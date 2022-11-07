@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CountryCard = ({ countries }) => {
-    const noCountriesFound = (
-        <div
-            className="text-lg font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-          md:text-2xl">
-            No Countries Found
-        </div>
-    );
+    const count = 12;
+    const [countriesCount, setCountriesCount] = useState(count);
 
-    const countriesToDisplay = countries?.map((country, key) => {
+    function loadMoreCountries() {
+        setCountriesCount((pre) => pre + count);
+    }
+
+    const countriesToDisplay = countries?.slice(0, countriesCount).map((country, key) => {
         const { name, population, region, capital } = country;
 
         return (
@@ -49,6 +48,8 @@ const CountryCard = ({ countries }) => {
         );
     });
 
+    const noCountriesFound = <div className="text-xl font-bold mt-10">No Countries Found !!</div>;
+
     const country = countries?.length <= 0 ? noCountriesFound : countriesToDisplay;
 
     return (
@@ -58,6 +59,16 @@ const CountryCard = ({ countries }) => {
                 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {country}
             </div>
+
+            {countries.length > countriesCount && (
+                <div className="flex gap-4 flex-wrap items-center justify-center">
+                    <button
+                        className="border-2 py-3 px-5 rounded-lg shadow-md"
+                        onClick={loadMoreCountries}>
+                        Load More
+                    </button>
+                </div>
+            )}
         </>
     );
 };
