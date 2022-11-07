@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-const CountryDetail = () => {
+const CountryDetail = ({ countries }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -33,19 +33,45 @@ const CountryDetail = () => {
 
     const nativeName = Object.values(countryRef.current.name.nativeName)[0].common;
 
-    const borderCountries = borders ? (
-        borders.map((border, id) => {
+    // ! country Border
+
+    const borderToDisplay = [];
+    let borderCountries;
+
+    borders?.map((bor) => {
+        countries?.map((country) => {
+            const borderCountry = country.cca3;
+            if (bor == borderCountry) {
+                borderToDisplay.push(country.name.common);
+
+                borderCountries = borderToDisplay.map((border, id) => {
+                    return (
+                        <Link
+                            state={country}
+                            key={id}
+                            className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold flex items-center justify-center text-input">
+                            {border}
+                        </Link>
+                    );
+                });
+            }
+        });
+    });
+
+    countries?.map((country, id) => {
+        borderToDisplay?.map((bor) => {
             return (
-                <p
+                <Link
+                    state={country}
                     key={id}
-                    className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold text-input">
-                    {border}
-                </p>
+                    className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold flex items-center justify-center text-input">
+                    {bor}
+                </Link>
             );
-        })
-    ) : (
-        <p>No Border Countries</p>
-    );
+        });
+    });
+
+    //  !!!
 
     return (
         <div
@@ -120,7 +146,9 @@ const CountryDetail = () => {
                 md:mb-0 min-w-max ">
                             Border Countries:
                         </h4>
-                        <div className="flex w-full gap-3 text-center">{borderCountries}</div>
+                        <div className="flex w-full gap-3 text-center cursor-pointer">
+                            {borderCountries}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ function App() {
                     path="/"
                     element={<HomePage countries={allCountries} loading={loading} error={error} />}
                 />
-                <Route path="/Country" element={<CountryDetail />} />
+                <Route path="/Country" element={<CountryDetail countries={allCountries} />} />
             </Routes>
         </div>
     );

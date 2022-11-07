@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (API_URL) => {
-    const [fetchedData, setFetchedData] = useState(null);
+    const [fetchedData, setFetchedData] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 

@@ -17,15 +17,16 @@ const CountryCard = ({ countries }) => {
                 key={key}
                 to="/Country"
                 state={country}
-                className={`card shadow rounded-md overflow-hidden w-full max-w-[285px] h-[340px] bg-element cursor-pointer hover:scale-105 duration-200 hover:shadow-xl`}>
-                <div className="h-[50%] overflow-hidden">
+                className={`card shadow rounded-md overflow-hidden bg-element 
+                 cursor-pointer hover:scale-105 duration-200 hover:shadow-xl`}>
+                <div className="overflow-hidden aspect-video">
                     <img
                         src={country.flags.png}
                         alt="flag img"
                         className="object-cover w-full h-full"
                     />
                 </div>
-                <div className="p-5">
+                <div className="p-6">
                     <h1 className="font-extrabold text-lg">{name.common}</h1>
                     <div className="my-3">
                         <p className="font-normal">
@@ -55,8 +56,8 @@ const CountryCard = ({ countries }) => {
     return (
         <>
             <div
-                className="flex flex-wrap gap-8 justify-center px-6 
-                sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-12">
+                className="grid gap-8 px-6 place-content-center
+                sm:px-0 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3 xl:grid-cols-4 lg:gap-14">
                 {country}
             </div>
 
