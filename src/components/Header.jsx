@@ -4,7 +4,7 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "../context/useContext";
 
 const Header = () => {
-    const { darkMode, toggleMode } = useTheme();
+    const [darkMode, toggleMode] = useTheme();
 
     return (
         <div className="text-primary bg-element relative duration-200">

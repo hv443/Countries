@@ -21,7 +21,7 @@ export function ContextProvider({ children }) {
     }
 
     return (
-        <DarkMode.Provider value={{ darkMode, toggleMode }}>
+        <DarkMode.Provider value={[darkMode, toggleMode]}>
             <Countries.Provider value={[countries, error, loading]}>{children}</Countries.Provider>
         </DarkMode.Provider>
     );

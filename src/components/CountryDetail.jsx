@@ -6,7 +6,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useCountries } from "../context/useContext";
 
 const CountryDetail = () => {
-    const [countries, error, loading] = useCountries();
+    const [countries] = useCountries();
 
     const location = useLocation();
     const [selectedCountry, setSelectedCountry] = useState(location.state);

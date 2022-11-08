@@ -5,7 +5,7 @@ import CountryDetail from "./components/CountryDetail";
 import { useTheme } from "./context/useContext";
 
 function App() {
-    const { darkMode } = useTheme();
+    const [darkMode] = useTheme();
 
     return (
         <div className={`${darkMode ? "dark" : null}`}>
