@@ -3,8 +3,11 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useCountries } from "../context/useContext";
 
-const CountryDetail = ({ countries }) => {
+const CountryDetail = () => {
+    const [countries, error, loading] = useCountries();
+
     const location = useLocation();
     const [selectedCountry, setSelectedCountry] = useState(location.state);
 

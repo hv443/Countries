@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useCountries } from "../context/useContext";
 
-function RegionFilterBtn({ countries, setFilteredCountries }) {
+function RegionFilterBtn({ setFilteredCountries }) {
     const [regionText, setRegionText] = useState(null);
+    const [countries] = useCountries();
     const [isRegionSelected, setIsRegionSelected] = useState(false);
 
     const regions = ["All", "Asia", "Africa", "Americas", "Europe", "Oceania"];

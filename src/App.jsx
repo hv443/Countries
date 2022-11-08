@@ -1,27 +1,18 @@
-import { useState } from "react";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 import { Routes, Route } from "react-router-dom";
 import CountryDetail from "./components/CountryDetail";
-import { useFetch } from "./hooks/useFetch";
+import { useTheme } from "./context/useContext";
 
 function App() {
-    const [darkMode, setDarkMode] = useState(false);
-    const [allCountries, error, loading] = useFetch("https://restcountries.com/v3.1/all");
-
-    function toggleDarkMode() {
-        setDarkMode((pre) => !pre);
-    }
+    const { darkMode } = useTheme();
 
     return (
         <div className={`${darkMode ? "dark" : null}`}>
-            <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+            <Header />
             <Routes>
-                <Route
-                    path="/"
-                    element={<HomePage countries={allCountries} loading={loading} error={error} />}
-                />
-                <Route path="/Country" element={<CountryDetail countries={allCountries} />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/Country" element={<CountryDetail />} />
             </Routes>
         </div>
     );

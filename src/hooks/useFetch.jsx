@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (API_URL) => {
-    const [fetchedData, setFetchedData] = useState();
+    const [countries, setFetchedData] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -38,7 +38,7 @@ export const useFetch = (API_URL) => {
         }
     }
 
-    return [fetchedData, error, loading];
+    return [countries, error, loading];
 };
 
 // "https://restcountries.com/v3.1/all"

@@ -4,10 +4,13 @@ import CountryCards from "./CountryCards";
 import SearchFilter from "../mini_components/SearchFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { useCountries } from "../context/useContext";
+import Loading from "../mini_components/Loading";
 
-const HomePage = ({ countries, loading, error }) => {
+const HomePage = () => {
     const [filteredCountries, setFilteredCountries] = useState(null);
     const [scrollValue, setScrollValue] = useState();
+    const [countries, error, loading] = useCountries();
 
     function scrollToTop() {
         if (scrollValue > 300) {
@@ -32,23 +35,15 @@ const HomePage = ({ countries, loading, error }) => {
                 <div
                     className="flex flex-col gap-8
                        md:flex-row md:justify-between md:gap-0">
-                    <SearchFilter
-                        countries={countries}
-                        setFilteredCountries={setFilteredCountries}
-                    />
+                    <SearchFilter setFilteredCountries={setFilteredCountries} />
 
-                    <RegionFilterBtn
-                        countries={countries}
-                        setFilteredCountries={setFilteredCountries}
-                    />
+                    <RegionFilterBtn setFilteredCountries={setFilteredCountries} />
                 </div>
 
                 {loading ? (
-                    <h1 className="w-full h-[50vh] text-3xl flex items-center justify-center">
-                        Loading...
-                    </h1>
+                    <Loading />
                 ) : error ? (
-                    <h1 className="w-full  text-base text-center">{error}</h1>
+                    <Error error={error} />
                 ) : (
                     <CountryCards countries={filteredCountries ?? countries} />
                 )}

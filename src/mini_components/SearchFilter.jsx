@@ -1,8 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useCountries } from "../context/useContext";
 
-const SearchFilter = ({ countries, setFilteredCountries }) => {
+const SearchFilter = ({ setFilteredCountries }) => {
+    const [countries] = useCountries();
+
     function searchFilter(e) {
         const inputValue = e.target.value;
         const searchFilteredCountries = countries?.filter((country) => {
