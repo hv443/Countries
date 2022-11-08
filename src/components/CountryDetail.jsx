@@ -41,6 +41,7 @@ const CountryDetail = () => {
         countries?.forEach((country) => {
             if (border == country.cca3) {
                 borderCountriesName.push(country.name.common);
+                return;
             }
         });
     });
