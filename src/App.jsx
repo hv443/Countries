@@ -2,25 +2,19 @@ import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 import { Routes, Route } from "react-router-dom";
 import CountryDetail from "./components/CountryDetail";
-import { ContextProvider } from "./context/useContext";
-import { useState } from "react";
+import { useTheme } from "./context/useContext";
 
 function App() {
-    const [darkMode, setMode] = useState(false);
-    function toggleMode() {
-        setMode((pre) => !pre);
-    }
+    const [darkMode] = useTheme();
 
     return (
-        <ContextProvider>
-            <div className={`${darkMode ? "dark" : null}`}>
-                <Header toggleMode={toggleMode} darkMode={darkMode} />
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/Country" element={<CountryDetail />} />
-                </Routes>
-            </div>
-        </ContextProvider>
+        <div className={`${darkMode ? "dark" : null}`}>
+            <Header />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/Country" element={<CountryDetail />} />
+            </Routes>
+        </div>
     );
 }
 
