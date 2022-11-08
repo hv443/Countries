@@ -18,7 +18,7 @@ const SearchFilter = ({ countries, setFilteredCountries }) => {
                 type="text"
                 name="search"
                 placeholder="Search for a country..."
-                className="px-10 py-3 shadow w-full rounded-md outline-none text-input bg-element duration-200
+                className="px-12 py-3 shadow w-full rounded-md outline-none text-input bg-element duration-200
                        md:w-96"
             />
             <FontAwesomeIcon

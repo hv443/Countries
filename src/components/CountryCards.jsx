@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-const CountryCard = ({ countries }) => {
-    const count = 12;
-    const [countriesCount, setCountriesCount] = useState(count);
+const CountryCards = ({ countries }) => {
+    const count = useRef(12);
+    const [countriesCount, setCountriesCount] = useState(count.current);
+
+    useEffect(() => {
+        setCountriesCount(count.current);
+    }, [countries]);
 
     function loadMoreCountries() {
-        setCountriesCount((pre) => pre + count);
+        setCountriesCount((pre) => pre + count.current);
     }
 
     const countriesToDisplay = countries?.slice(0, countriesCount).map((country, key) => {
@@ -67,7 +73,7 @@ sm:px-0 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3 xl:grid-cols-4 lg:gap-14">
             {countries.length > countriesCount && (
                 <div className="flex gap-4 flex-wrap items-center justify-center">
                     <button
-                        className="border border-primary py-3 px-5 rounded-lg bg-primary text-secondary duration-300 shadow hover:bg-secondary hover:text-primary"
+                        className="border border-primary py-3 px-5 rounded-lg bg-primary text-secondary duration-300 shadow active:bg-secondary active:text-primary sm:hover:bg-secondary sm:hover:text-primary"
                         onClick={loadMoreCountries}>
                         Load More
                     </button>
@@ -77,4 +83,4 @@ sm:px-0 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3 xl:grid-cols-4 lg:gap-14">
     );
 };
 
-export default CountryCard;
+export default CountryCards;

@@ -15,6 +15,7 @@ export const useFetch = (API_URL) => {
                 `);
                 }
                 const data = await response.json();
+                shuffleArray(data);
                 setFetchedData(data);
                 setError(null);
             } catch (error) {
@@ -27,6 +28,15 @@ export const useFetch = (API_URL) => {
 
         fetchData();
     }, [API_URL]);
+
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 
     return [fetchedData, error, loading];
 };

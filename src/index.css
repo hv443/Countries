@@ -15,6 +15,7 @@
   --primary: hsl(0, 0%, 100%);
   --secondary: hsl(207, 26%, 17%);
   --element: hsl(209, 23%, 22%);
+  --input: hsl(0, 0%, 70%);
 }
 
 * {

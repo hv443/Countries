@@ -6,7 +6,7 @@ const Header = ({ toggleDarkMode, darkMode }) => {
     return (
         <div className="text-primary bg-element relative duration-200">
             <div className="flex justify-between items-center py-5 px-3 shadow font-bold sm:px-10 ">
-                <h1 className="text-lg md:text-xl">Where in the world?</h1>
+                <h1 className="text-base md:text-xl">Where in the world?</h1>
                 <button className="space-x-1 flex items-center" onClick={toggleDarkMode}>
                     <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
                     <span className="text-sm">{darkMode ? "Light" : "Dark"}</span>

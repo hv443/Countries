@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const CountryDetail = ({ countries }) => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
     const location = useLocation();
-    const countryRef = useRef(location.state);
+    const [selectedCountry, setSelectedCountry] = useState(location.state);
+
     const {
         flags: { png: flag },
         name: { common: countryName },
@@ -22,7 +19,7 @@ const CountryDetail = ({ countries }) => {
         languages,
         tld,
         borders,
-    } = countryRef.current;
+    } = selectedCountry;
 
     borders?.length > 3 ? borders.splice(3) : borders;
 
@@ -31,53 +28,51 @@ const CountryDetail = ({ countries }) => {
         .map((lan) => lan)
         .join(",");
 
-    const nativeName = Object.values(countryRef.current.name.nativeName)[0].common;
+    const nativeName = Object.values(selectedCountry.name.nativeName)[0].common;
 
     // ! country Border
 
-    const borderToDisplay = [];
-    let borderCountries;
+    let borderCountriesName = [];
 
-    borders?.map((bor) => {
-        countries?.map((country) => {
-            const borderCountry = country.cca3;
-            if (bor == borderCountry) {
-                borderToDisplay.push(country.name.common);
-
-                borderCountries = borderToDisplay.map((border, id) => {
-                    return (
-                        <Link
-                            state={country}
-                            key={id}
-                            className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold flex items-center justify-center text-input">
-                            {border}
-                        </Link>
-                    );
-                });
+    borders?.forEach((border) => {
+        countries?.forEach((country) => {
+            if (border == country.cca3) {
+                borderCountriesName.push(country.name.common);
             }
         });
     });
 
-    countries?.map((country, id) => {
-        borderToDisplay?.map((bor) => {
-            return (
-                <Link
-                    state={country}
-                    key={id}
-                    className="bg-element shadow w-full rounded-sm py-2 text-sm font-semibold flex items-center justify-center text-input">
-                    {bor}
-                </Link>
-            );
-        });
-    });
+    const borderCountries = borders
+        ? countries?.map((country) => {
+              const borderCountry = borderCountriesName.map((border, id) => {
+                  if (border == country.name.common) {
+                      return (
+                          <Link
+                              key={id}
+                              state={country}
+                              to="/Country"
+                              className="bg-element shadow w-full rounded-sm p-2 text-sm font-semibold flex items-center justify-center duration-200 text-input hover:bg-input hover:text-secondary">
+                              {border}
+                          </Link>
+                      );
+                  }
+              });
+              return borderCountry;
+          })
+        : "No Border Countries";
 
     //  !!!
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        setSelectedCountry(location.state);
+    }, [borderCountries]);
 
     return (
         <div className="text-primary bg-secondary min-h-screen text-base duration-200">
             <main
-                className="mx-auto p-5 pt-14
-       sm:max-w-[85%] ">
+                className="mx-auto p-5 pt-10
+       sm:max-w-[85%] sm:pt-14">
                 <Link to="/">
                     <button className="w-28 p-2 shadow flex items-center justify-evenly bg-element rounded-sm duration-200 ">
                         <FontAwesomeIcon icon={faArrowLeft} />
@@ -147,7 +142,7 @@ const CountryDetail = ({ countries }) => {
                 md:mb-0 min-w-max ">
                                 Border Countries:
                             </h4>
-                            <div className="flex w-full gap-3 text-center cursor-pointer">
+                            <div className="flex w-full gap-1 text-center cursor-pointer">
                                 {borderCountries}
                             </div>
                         </div>
