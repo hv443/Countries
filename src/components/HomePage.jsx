@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useCountries } from "../context/useContext";
 import Loading from "../mini_components/Loading";
+import { useEffect } from "react";
 
 const HomePage = () => {
     const [filteredCountries, setFilteredCountries] = useState(null);

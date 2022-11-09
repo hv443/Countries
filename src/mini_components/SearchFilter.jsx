@@ -8,10 +8,17 @@ const SearchFilter = ({ setFilteredCountries }) => {
 
     function searchFilter(e) {
         const inputValue = e.target.value;
+
         const searchFilteredCountries = countries?.filter((country) => {
             return country.name.common.toLowerCase().includes(inputValue.toLowerCase());
         });
         setFilteredCountries(searchFilteredCountries);
+
+        // setFilteredCountries((countries) => {
+        //     return countries.filter((country) => {
+        //         return country.name.common.toLowerCase().includes(inputValue.toLowerCase());
+        //     });
+        // });
     }
 
     return (
