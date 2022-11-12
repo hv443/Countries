@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useFetch } from "../hooks/useFetch";
 
 const Countries = createContext();
@@ -15,7 +15,13 @@ export function useTheme() {
 export function ContextProvider({ children }) {
     const [countries, error, loading] = useFetch("https://restcountries.com/v3.1/all");
 
-    const [darkMode, setMode] = useState(false);
+    const theme = JSON.parse(localStorage.getItem("theme")) || false;
+    const [darkMode, setMode] = useState(theme);
+
+    useEffect(() => {
+        localStorage.setItem("theme", JSON.stringify(darkMode));
+    }, [darkMode]);
+
     function toggleMode() {
         setMode((pre) => !pre);
     }
